@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TTTGame.h"
+#import "TTTBoard.h"
 
 @interface TicTacToeGameViewController : UIViewController<TTTGameDelegate>
 
-- (id)initWithGame:(TTTGame*)game;
+- (id)initWithBoard:(TTTBoard*)game;
 
 @end

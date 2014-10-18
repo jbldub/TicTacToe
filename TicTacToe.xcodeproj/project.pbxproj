@@ -19,12 +19,12 @@
 		D08ADE6719EE13D40050175D /* TicTacToeGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D08ADE6519EE13D40050175D /* TicTacToeGameViewController.xib */; };
 		D08ADE6A19EE303E0050175D /* TTTBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ADE6919EE303E0050175D /* TTTBoard.m */; };
 		D08ADE6D19EF3DCC0050175D /* TTTExpertPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ADE6C19EF3DCC0050175D /* TTTExpertPlayer.m */; };
-		D08ADE7019EF3DDC0050175D /* TTTGame.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ADE6F19EF3DDC0050175D /* TTTGame.m */; };
 		D08ADE7619EF3E410050175D /* TTTStrategyFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ADE7519EF3E410050175D /* TTTStrategyFactory.m */; };
-		D08ADE7919EF40B10050175D /* TTTStrategySimple.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ADE7819EF40B10050175D /* TTTStrategySimple.m */; };
+		D08ADE7919EF40B10050175D /* TTTStrategyNaive.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ADE7819EF40B10050175D /* TTTStrategyNaive.m */; };
 		D08ADE8919EF69080050175D /* TTTConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ADE8819EF69080050175D /* TTTConstants.m */; };
 		D08ADE8D19EF72AD0050175D /* TTTCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ADE8B19EF72AD0050175D /* TTTCollectionViewCell.m */; };
 		D08ADE8E19EF72AD0050175D /* TTTCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D08ADE8C19EF72AD0050175D /* TTTCollectionViewCell.xib */; };
+		D08ADE9119F1D4DC0050175D /* TTTStrategyMinimax.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ADE9019F1D4DC0050175D /* TTTStrategyMinimax.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,18 +60,18 @@
 		D08ADE6919EE303E0050175D /* TTTBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTBoard.m; sourceTree = "<group>"; };
 		D08ADE6B19EF3DCC0050175D /* TTTExpertPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTExpertPlayer.h; sourceTree = "<group>"; };
 		D08ADE6C19EF3DCC0050175D /* TTTExpertPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTExpertPlayer.m; sourceTree = "<group>"; };
-		D08ADE6E19EF3DDC0050175D /* TTTGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTGame.h; sourceTree = "<group>"; };
-		D08ADE6F19EF3DDC0050175D /* TTTGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTGame.m; sourceTree = "<group>"; };
 		D08ADE7419EF3E410050175D /* TTTStrategyFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTStrategyFactory.h; sourceTree = "<group>"; };
 		D08ADE7519EF3E410050175D /* TTTStrategyFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTStrategyFactory.m; sourceTree = "<group>"; };
-		D08ADE7719EF40B10050175D /* TTTStrategySimple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTStrategySimple.h; sourceTree = "<group>"; };
-		D08ADE7819EF40B10050175D /* TTTStrategySimple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTStrategySimple.m; sourceTree = "<group>"; };
+		D08ADE7719EF40B10050175D /* TTTStrategyNaive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTStrategyNaive.h; sourceTree = "<group>"; };
+		D08ADE7819EF40B10050175D /* TTTStrategyNaive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTStrategyNaive.m; sourceTree = "<group>"; };
 		D08ADE7E19EF50E60050175D /* TTTStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTStrategy.h; sourceTree = "<group>"; };
 		D08ADE8719EF69080050175D /* TTTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTConstants.h; sourceTree = "<group>"; };
 		D08ADE8819EF69080050175D /* TTTConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTConstants.m; sourceTree = "<group>"; };
 		D08ADE8A19EF72AD0050175D /* TTTCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTCollectionViewCell.h; sourceTree = "<group>"; };
 		D08ADE8B19EF72AD0050175D /* TTTCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTCollectionViewCell.m; sourceTree = "<group>"; };
 		D08ADE8C19EF72AD0050175D /* TTTCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TTTCollectionViewCell.xib; sourceTree = "<group>"; };
+		D08ADE8F19F1D4DC0050175D /* TTTStrategyMinimax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTStrategyMinimax.h; sourceTree = "<group>"; };
+		D08ADE9019F1D4DC0050175D /* TTTStrategyMinimax.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTStrategyMinimax.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,13 +121,13 @@
 				D08ADE6119EE05DB0050175D /* TTTPlayer.m */,
 				D08ADE6B19EF3DCC0050175D /* TTTExpertPlayer.h */,
 				D08ADE6C19EF3DCC0050175D /* TTTExpertPlayer.m */,
-				D08ADE6E19EF3DDC0050175D /* TTTGame.h */,
-				D08ADE6F19EF3DDC0050175D /* TTTGame.m */,
 				D08ADE6819EE303E0050175D /* TTTBoard.h */,
 				D08ADE6919EE303E0050175D /* TTTBoard.m */,
 				D08ADE7E19EF50E60050175D /* TTTStrategy.h */,
-				D08ADE7719EF40B10050175D /* TTTStrategySimple.h */,
-				D08ADE7819EF40B10050175D /* TTTStrategySimple.m */,
+				D08ADE7719EF40B10050175D /* TTTStrategyNaive.h */,
+				D08ADE7819EF40B10050175D /* TTTStrategyNaive.m */,
+				D08ADE8F19F1D4DC0050175D /* TTTStrategyMinimax.h */,
+				D08ADE9019F1D4DC0050175D /* TTTStrategyMinimax.m */,
 				D08ADE7419EF3E410050175D /* TTTStrategyFactory.h */,
 				D08ADE7519EF3E410050175D /* TTTStrategyFactory.m */,
 				D08ADE5A19EDEF490050175D /* StartScreenViewController.h */,
@@ -278,11 +278,11 @@
 				D08ADE6A19EE303E0050175D /* TTTBoard.m in Sources */,
 				D08ADE8919EF69080050175D /* TTTConstants.m in Sources */,
 				D08ADE7619EF3E410050175D /* TTTStrategyFactory.m in Sources */,
-				D08ADE7919EF40B10050175D /* TTTStrategySimple.m in Sources */,
-				D08ADE7019EF3DDC0050175D /* TTTGame.m in Sources */,
+				D08ADE7919EF40B10050175D /* TTTStrategyNaive.m in Sources */,
 				D08ADE6219EE05DB0050175D /* TTTPlayer.m in Sources */,
 				D08ADE2E19EDEA2D0050175D /* AppDelegate.m in Sources */,
 				D08ADE6D19EF3DCC0050175D /* TTTExpertPlayer.m in Sources */,
+				D08ADE9119F1D4DC0050175D /* TTTStrategyMinimax.m in Sources */,
 				D08ADE8D19EF72AD0050175D /* TTTCollectionViewCell.m in Sources */,
 				D08ADE2B19EDEA2D0050175D /* main.m in Sources */,
 				D08ADE5D19EDEF490050175D /* StartScreenViewController.m in Sources */,

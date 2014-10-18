@@ -13,6 +13,11 @@ typedef struct TTTPosition {
     int y;
 } TTTPosition;
 
+TTTPosition TTTPositionMake(int x, int y);
+int intFromTTTPosition(TTTPosition pos);
+TTTPosition TTTPositionFromInt(int pos);
+//NSIndexPath* indexPathFromInt(int pos);
+
 #define BOARD_SIZE  3
 
 

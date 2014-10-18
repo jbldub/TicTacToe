@@ -9,6 +9,7 @@
 #import "StartScreenViewController.h"
 #import "TicTacToeGameViewController.h"
 #import "TTTPlayer.h"
+#import "TTTBoard.h"
 
 @interface StartScreenViewController ()
 
@@ -41,8 +42,8 @@
 - (IBAction)startGameButtonPressed:(id)sender {
     TTTPlayer* player1 = [[TTTPlayer alloc] initWithName:self.player1TextField.text playerType:TTTPlayerTypeX];
     TTTPlayer* player2 = [[TTTPlayer alloc] initWithName:self.player2TextField.text playerType:TTTPlayerTypeO];
-    TTTGame* game = [[TTTGame alloc] initGameWIthPlayer1:player1 player2:player2];
-    TicTacToeGameViewController* gameVC = [[TicTacToeGameViewController alloc] initWithGame:game];
+    TTTBoard* board = [[TTTBoard alloc] initGameWithPlayer1:player1 player2:player2];
+    TicTacToeGameViewController* gameVC = [[TicTacToeGameViewController alloc] initWithBoard:board];
     
     [self.navigationController pushViewController:gameVC animated:YES];
 }

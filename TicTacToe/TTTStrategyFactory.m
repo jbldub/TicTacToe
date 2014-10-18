@@ -8,7 +8,8 @@
 
 #import "TTTStrategyFactory.h"
 #import "TTTStrategy.h"
-#import "TTTStrategySimple.h"
+#import "TTTStrategyNaive.h"
+#import "TTTStrategyMinimax.h"
 
 @implementation TTTStrategyFactory
 
@@ -24,8 +25,11 @@
 - (id<TTTStrategy>)strategyForType:(TTTStrategyType)type {
     id<TTTStrategy> strategy = nil;
     switch (type) {
-        case TTTStrategyTypeSimple:
-            strategy = [[TTTStrategySimple alloc] init];
+        case TTTStrategyTypeNaive:
+            strategy = [[TTTStrategyNaive alloc] init];
+            break;
+        case TTTSTrategyTypeMiniMax:
+            strategy = [[TTTStrategyMinimax alloc] init];
             break;
         default:
             break;

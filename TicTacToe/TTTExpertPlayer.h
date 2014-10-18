@@ -15,6 +15,6 @@
 
 - (id)initWithName:(NSString *)playerName playerType:(TTTPlayerType)type strategy:(TTTStrategyType)strategy;
 
-- (TTTPosition)makeNextMoveOnBoard:(TTTBoard*)board;
+- (int)makeNextMoveOnBoard:(TTTBoard*)board;
 
 @end

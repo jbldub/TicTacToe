@@ -12,7 +12,8 @@
 
 @interface TicTacToeGameViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UICollectionView *ticTacToeCollectionView;
-@property (nonatomic, strong) TTTGame* game;
+//@property (nonatomic, strong) TTTGame* game;
+@property (nonatomic, strong) TTTBoard* board;
 @property (nonatomic, weak) TTTPlayer* activePlayer;
 @property (nonatomic, strong) NSAttributedString* playerXAttributedString;
 @property (nonatomic, strong) NSAttributedString* playerOAttributedString;
@@ -20,11 +21,11 @@
 
 @implementation TicTacToeGameViewController
 
-- (id)initWithGame:(TTTGame*)game {
+- (id)initWithBoard:(TTTBoard*)board {
     self = [super init];
     if (self) {
-        _game = game;
-        _game.delegate = self;
+        _board = board;
+        _board.delegate = self;
         
         NSDictionary* playerXAttributes = @{ NSForegroundColorAttributeName : [UIColor redColor] };
         NSDictionary* playerOAttributes = @{ NSForegroundColorAttributeName : [UIColor greenColor] };
@@ -38,7 +39,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     
-    [self.game start];
+    [self.board startGame];
 }
 
 - (void)viewDidLoad {
@@ -58,16 +59,23 @@
 }
 
 - (void)moveSuccessfulForPlayer:(TTTPlayer *)player atPosition:(TTTPosition)pos {
-    
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:pos.y inSection:pos.x];
+    NSArray* array = @[indexPath];
+//    TTTCollectionViewCell *cell = [self.ticTacToeCollectionView dequeueReusableCellWithReuseIdentifier:@"TTTCollectionViewCell" forIndexPath:indexPath];
+//    cell.ticTacToeMarker.attributedText = [self labelForPlayerAtIndexPath:indexPath];
+    [self.ticTacToeCollectionView reloadItemsAtIndexPaths:array];
+//    [self.board queryNextMove];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 3;
+    return BOARD_SIZE;
 }
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TTTCollectionViewCell *cell = [self.ticTacToeCollectionView dequeueReusableCellWithReuseIdentifier:@"TTTCollectionViewCell" forIndexPath:indexPath];
+    cell.layer.borderWidth = 1;
+    cell.layer.borderColor = [UIColor blackColor].CGColor;
     cell.ticTacToeMarker.attributedText = [self labelForPlayerAtIndexPath:indexPath];
     
     return cell;
@@ -78,7 +86,7 @@
     TTTPosition pos;
     pos.x = (int)indexPath.section;
     pos.y = (int)indexPath.row;
-    TTTPlayer* player = [self.game playerAtPosition:pos];
+    TTTPlayer* player = [self.board playerAtTTTPosition:pos];
     if (player && player.type == TTTPlayerTypeX) {
         return self.playerXAttributedString;
     } else if (player && player.type == TTTPlayerTypeO) {
@@ -88,7 +96,7 @@
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 3;
+    return BOARD_SIZE;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -96,8 +104,7 @@
     TTTPosition pos;
     pos.x = (int)indexPath.section;
     pos.y = (int)indexPath.row;
-    [self.game makeMoveForPlayer:self.activePlayer atPosition:pos];
-    
+    [self.board markBoardAtPosition:intFromTTTPosition(pos)];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

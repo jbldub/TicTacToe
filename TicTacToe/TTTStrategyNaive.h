@@ -1,5 +1,5 @@
 //
-//  TTTStrategy.h
+//  TTTStrategyNaive.h
 //  TicTacToe
 //
 //  Created by Justin Williams on 10/15/14.
@@ -7,10 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TTTConstants.h"
+#import "TTTStrategy.h"
 
-@class TTTBoard;
 
-@protocol TTTStrategy <NSObject>
-- (int)optimalPositionFromBoard:(TTTBoard*)board;
+@interface TTTStrategyNaive : NSObject<TTTStrategy>
+
 @end

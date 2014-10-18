@@ -28,7 +28,7 @@
     return self;
 }
 
-- (TTTPosition)makeNextMoveOnBoard:(TTTBoard *)board {
+- (int)makeNextMoveOnBoard:(TTTBoard *)board {
     return [self.strategy optimalPositionFromBoard:board];
 }
 

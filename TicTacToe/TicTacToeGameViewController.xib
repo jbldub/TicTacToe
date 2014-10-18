@@ -15,9 +15,13 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qc4-4f-Pkl">
-                    <rect key="frame" x="20" y="40" width="280" height="420"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qc4-4f-Pkl">
+                    <rect key="frame" x="20" y="40" width="280" height="240"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="280" id="iIO-5k-eV1"/>
+                        <constraint firstAttribute="height" constant="240" id="xWG-SU-NGf"/>
+                    </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hlm-0y-OXg">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -27,6 +31,10 @@
                 </collectionView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="qc4-4f-Pkl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="40" id="t7n-2H-hBC"/>
+                <constraint firstAttribute="centerX" secondItem="qc4-4f-Pkl" secondAttribute="centerX" id="yac-pQ-iCH"/>
+            </constraints>
             <point key="canvasLocation" x="565" y="570"/>
         </view>
     </objects>

@@ -12,7 +12,8 @@
 @protocol TTTStrategy;
 
 typedef enum {
-    TTTStrategyTypeSimple
+    TTTStrategyTypeNaive,
+    TTTSTrategyTypeMiniMax
 } TTTStrategyType;
 
 @interface TTTStrategyFactory : NSObject
