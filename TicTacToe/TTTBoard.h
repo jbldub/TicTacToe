@@ -28,7 +28,7 @@
 - (TTTPlayer*)playerAtPosition:(int)pos;
 - (NSArray*)possibleMoves;
 + (NSArray*)winningScores;
-- (void)startGame;
+- (void)startGameFirstPlayer:(TTTPlayer*)player;
 - (NSString*)description;
 
 @property (nonatomic) BOOL gameEnded;

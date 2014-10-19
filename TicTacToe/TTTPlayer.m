@@ -21,4 +21,8 @@
     return self;
 }
 
+- (BOOL)automatedPlayer {
+    return NO;
+}
+
 @end

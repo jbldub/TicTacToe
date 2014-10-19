@@ -10,6 +10,7 @@
                 <outlet property="player1SymbolLabel" destination="Haj-r4-nmu" id="cia-ec-Mgb"/>
                 <outlet property="player2Label" destination="BKf-NM-7LR" id="tbM-Gx-qnt"/>
                 <outlet property="player2SymbolLabel" destination="ynr-Ix-7IY" id="MXj-FT-cQl"/>
+                <outlet property="restartPlayer1" destination="weY-Lx-tdJ" id="myI-OK-Z7W"/>
                 <outlet property="ticTacToeCollectionView" destination="qc4-4f-Pkl" id="Rsb-Gc-urc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="winnerLabel" destination="rF5-6s-Bg4" id="BwF-WB-VOc"/>
@@ -52,17 +53,8 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="weY-Lx-tdJ">
-                    <rect key="frame" x="124" y="530" width="72" height="30"/>
-                    <state key="normal" title="Restart">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="restartButtonPressed:" destination="-1" eventType="touchUpInside" id="LsW-Ha-JqD"/>
-                    </connections>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Haj-r4-nmu">
-                    <rect key="frame" x="43" y="414" width="11" height="21"/>
+                    <rect key="frame" x="43" y="414" width="10.5" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -73,6 +65,15 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="weY-Lx-tdJ">
+                    <rect key="frame" x="135" y="530" width="50" height="30"/>
+                    <state key="normal" title="Restart">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="restartButtonPressed:" destination="-1" eventType="touchUpInside" id="LsW-Ha-JqD"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -80,6 +81,7 @@
                 <constraint firstItem="BKf-NM-7LR" firstAttribute="top" secondItem="qc4-4f-Pkl" secondAttribute="bottom" constant="101" id="3Pt-g1-5Gb"/>
                 <constraint firstAttribute="trailing" secondItem="BKf-NM-7LR" secondAttribute="trailing" constant="20" id="8Zz-n6-rJl"/>
                 <constraint firstItem="rF5-6s-Bg4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="9JR-ap-Jmc"/>
+                <constraint firstItem="BKf-NM-7LR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uZh-Uu-fL7" secondAttribute="trailing" constant="8" symbolic="YES" id="HYJ-4f-6WT"/>
                 <constraint firstItem="uZh-Uu-fL7" firstAttribute="top" secondItem="qc4-4f-Pkl" secondAttribute="bottom" constant="101" id="S1I-7q-gws"/>
                 <constraint firstAttribute="bottom" secondItem="rF5-6s-Bg4" secondAttribute="bottom" constant="110" id="Yw3-Im-8yR"/>
                 <constraint firstAttribute="trailing" secondItem="rF5-6s-Bg4" secondAttribute="trailing" constant="20" id="aly-dp-fUg"/>
@@ -87,9 +89,11 @@
                 <constraint firstItem="ynr-Ix-7IY" firstAttribute="centerX" secondItem="BKf-NM-7LR" secondAttribute="centerX" constant="0.5" id="eWi-Rr-zci"/>
                 <constraint firstItem="qc4-4f-Pkl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="40" id="t7n-2H-hBC"/>
                 <constraint firstItem="Haj-r4-nmu" firstAttribute="top" secondItem="uZh-Uu-fL7" secondAttribute="bottom" constant="12.5" id="tBO-H7-W8c"/>
+                <constraint firstAttribute="bottom" secondItem="weY-Lx-tdJ" secondAttribute="bottom" constant="8" id="tJp-Cw-orV"/>
                 <constraint firstItem="rF5-6s-Bg4" firstAttribute="top" secondItem="qc4-4f-Pkl" secondAttribute="bottom" constant="157" id="uhB-CG-LFU"/>
                 <constraint firstItem="ynr-Ix-7IY" firstAttribute="top" secondItem="BKf-NM-7LR" secondAttribute="bottom" constant="12.5" id="x9f-p9-CHH"/>
                 <constraint firstAttribute="centerX" secondItem="qc4-4f-Pkl" secondAttribute="centerX" id="yac-pQ-iCH"/>
+                <constraint firstAttribute="centerX" secondItem="weY-Lx-tdJ" secondAttribute="centerX" id="ylp-1y-a2d"/>
             </constraints>
             <point key="canvasLocation" x="565" y="570"/>
         </view>

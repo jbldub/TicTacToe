@@ -10,7 +10,7 @@
 #import "TTTCollectionViewCell.h"
 #import "TTTPlayer.h"
 
-@interface TicTacToeGameViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface TicTacToeGameViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *ticTacToeCollectionView;
 @property (nonatomic, strong) TTTBoard* board;
 @property (nonatomic, weak) TTTPlayer* activePlayer;
@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *player2SymbolLabel;
 @property (weak, nonatomic) IBOutlet UILabel *player1SymbolLabel;
 - (IBAction)restartButtonPressed:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *restartPlayer1;
+@property (weak, nonatomic) IBOutlet UIButton *restartPlayer2;
 @end
 
 @implementation TicTacToeGameViewController
@@ -43,8 +45,22 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [self showFirstMovePrompt];
     
-    [self.board startGame];
+}
+
+- (void)showFirstMovePrompt {
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"First Move" message:@"Who Will Make The First Move" delegate:self cancelButtonTitle:nil otherButtonTitles:self.board.player1.playerName, self.board.player2.playerName, nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        [self.board startGameFirstPlayer:self.board.player1];
+    } else if (buttonIndex == 1) {
+        [self.board startGameFirstPlayer:self.board.player2];
+    }
+    [self.ticTacToeCollectionView reloadData];
 }
 
 - (void)viewDidLoad {
@@ -63,6 +79,19 @@
     self.player1SymbolLabel.attributedText = self.board.player1.type == TTTPlayerTypeX ? self.playerXAttributedString : self.playerOAttributedString;
     
     self.player2SymbolLabel.attributedText = self.board.player2.type == TTTPlayerTypeX ? self.playerXAttributedString : self.playerOAttributedString;
+    
+//    
+//    NSMutableAttributedString* player1AttributedString = [[NSMutableAttributedString alloc] initWithString:self.board.player1.playerName attributes:nil];
+//    [player1AttributedString appendAttributedString:spaceString];
+//    [player1AttributedString appendAttributedString:self.playerXAttributedString];
+//    
+//    NSMutableAttributedString* player2AttributedString = [[NSMutableAttributedString alloc] initWithString:self.board.player2.playerName attributes:nil];
+//    [player2AttributedString appendAttributedString:self.playerOAttributedString];
+////    [player2AttributedString appendAttributedString:@""];
+//    
+//    [self.restartPlayer1 setAttributedTitle:player1AttributedString forState:UIControlStateNormal];
+////    self.restartPlayer1.titleLabel.attributedText = player1AttributedString;
+//    self.restartPlayer2.titleLabel.attributedText = player2AttributedString;
 
 }
 
@@ -72,9 +101,7 @@
 }
 
 - (void)moveSuccessfulForPlayer:(TTTPlayer *)player atPosition:(TTTPosition)pos {
-    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:pos.y inSection:pos.x];
-    NSArray* array = @[indexPath];
-    [self.ticTacToeCollectionView reloadItemsAtIndexPaths:array];
+    [self.ticTacToeCollectionView reloadData];
 }
 
 - (void)gameWonByPlayer:(TTTPlayer *)player atPositions:(NSArray *)boardPositions {
@@ -110,7 +137,7 @@
     } else if (player && player.type == TTTPlayerTypeO) {
         return self.playerOAttributedString;
     }
-    return nil;
+    return [[NSAttributedString alloc] initWithString:@"" attributes:nil];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -135,7 +162,6 @@
 
 - (IBAction)restartButtonPressed:(id)sender {
     self.winnerLabel.text = nil;
-    [self.board startGame];
-    [self.ticTacToeCollectionView reloadData];
+    [self showFirstMovePrompt];
 }
 @end

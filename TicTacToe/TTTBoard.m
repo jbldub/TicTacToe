@@ -44,12 +44,12 @@
     return newBoard;
 }
 
-- (void)startGame {
+- (void)startGameFirstPlayer:(TTTPlayer *)player {
     for (int i = 0; i < BOARD_SIZE*BOARD_SIZE; i++) {
         board[i] = nil;
     }
     
-    self.activePlayer = self.player1;
+    self.activePlayer = player;
     self.winningPlayer = nil;
     self.winningRow = nil;
     
@@ -66,7 +66,7 @@
     if (self.gameEnded) {
         [self.delegate gameWonByPlayer:self.winningPlayer atPositions:self.winningRow];
     }
-    else if ([self.activePlayer isKindOfClass:[TTTExpertPlayer class]]) {
+    else if ([self.activePlayer automatedPlayer]) {
         int pos = [(TTTExpertPlayer*)self.activePlayer makeNextMoveOnBoard:self];
         [self markBoardAtPosition:pos];
     } else {

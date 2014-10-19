@@ -22,7 +22,6 @@
     [super viewDidLoad];
     self.player1TextField.delegate = self;
     self.player2TextField.delegate = self;
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (IBAction)startGameButtonPressed:(UIButton*)sender {

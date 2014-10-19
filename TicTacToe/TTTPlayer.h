@@ -18,7 +18,6 @@ typedef enum {
 
 @property TTTPlayerType type;
 @property (nonatomic, strong, readonly) NSString* playerName;
-
 - (id)initWithName:(NSString*)playerName playerType:(TTTPlayerType)type;
-
+- (BOOL)automatedPlayer;
 @end

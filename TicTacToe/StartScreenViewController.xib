@@ -16,18 +16,18 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Player 1" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nxC-3e-NMF">
-                    <rect key="frame" x="8" y="203" width="304" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Player 1" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nxC-3e-NMF">
+                    <rect key="frame" x="8" y="173" width="304" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Player 2" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z5q-8S-B09">
-                    <rect key="frame" x="8" y="256" width="304" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Player 2" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z5q-8S-B09">
+                    <rect key="frame" x="8" y="226" width="304" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Peq-eO-6Nn">
-                    <rect key="frame" x="196" y="311" width="116" height="30"/>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Peq-eO-6Nn">
+                    <rect key="frame" x="202" y="311" width="110" height="30"/>
                     <state key="normal" title="Expert AI Player">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -35,14 +35,14 @@
                         <action selector="startGameButtonPressed:" destination="-1" eventType="touchUpInside" id="9aM-rc-ilc"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tic Tac Toe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0e-i8-e16">
-                    <rect key="frame" x="40" y="118" width="240" height="50"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tic Tac Toe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0e-i8-e16">
+                    <rect key="frame" x="117" y="118" width="86" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="umF-At-fi9">
-                    <rect key="frame" x="8" y="311" width="95" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="umF-At-fi9">
+                    <rect key="frame" x="8" y="311" width="82" height="30"/>
                     <state key="normal" title="Two Players">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -52,6 +52,20 @@
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="nxC-3e-NMF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="2MP-c0-vGe"/>
+                <constraint firstItem="z5q-8S-B09" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="8yK-RP-ytF"/>
+                <constraint firstItem="Peq-eO-6Nn" firstAttribute="top" secondItem="z5q-8S-B09" secondAttribute="bottom" constant="54.5" id="AIB-xy-wHg"/>
+                <constraint firstAttribute="trailing" secondItem="z5q-8S-B09" secondAttribute="trailing" constant="8" id="Hkb-74-sco"/>
+                <constraint firstItem="nxC-3e-NMF" firstAttribute="top" secondItem="i0e-i8-e16" secondAttribute="bottom" constant="35" id="Jw9-ow-bOS"/>
+                <constraint firstAttribute="centerX" secondItem="i0e-i8-e16" secondAttribute="centerX" id="Qat-XU-MBp"/>
+                <constraint firstItem="i0e-i8-e16" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="118" id="aMd-wU-SXp"/>
+                <constraint firstAttribute="trailing" secondItem="nxC-3e-NMF" secondAttribute="trailing" constant="8" id="awy-sb-awQ"/>
+                <constraint firstItem="umF-At-fi9" firstAttribute="leading" secondItem="z5q-8S-B09" secondAttribute="leading" id="mYn-Ku-aji"/>
+                <constraint firstItem="umF-At-fi9" firstAttribute="top" secondItem="z5q-8S-B09" secondAttribute="bottom" constant="54.5" id="sFk-ag-nGK"/>
+                <constraint firstItem="z5q-8S-B09" firstAttribute="top" secondItem="nxC-3e-NMF" secondAttribute="bottom" constant="23" id="tje-pg-xG4"/>
+                <constraint firstItem="z5q-8S-B09" firstAttribute="trailing" secondItem="Peq-eO-6Nn" secondAttribute="trailing" id="weR-8N-kkp"/>
+            </constraints>
             <point key="canvasLocation" x="565" y="570"/>
         </view>
     </objects>

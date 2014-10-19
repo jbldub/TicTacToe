@@ -32,4 +32,8 @@
     return [self.strategy optimalPositionFromBoard:board];
 }
 
+- (BOOL)automatedPlayer {
+    return YES;
+}
+
 @end
