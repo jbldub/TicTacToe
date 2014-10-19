@@ -11,9 +11,7 @@
 #import "TTTStrategy.h"
 
 @interface TTTExpertPlayer ()
-
 @property (nonatomic, strong) id<TTTStrategy> strategy;
-
 @end
 
 @implementation TTTExpertPlayer

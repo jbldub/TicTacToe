@@ -79,20 +79,6 @@
     self.player1SymbolLabel.attributedText = self.board.player1.type == TTTPlayerTypeX ? self.playerXAttributedString : self.playerOAttributedString;
     
     self.player2SymbolLabel.attributedText = self.board.player2.type == TTTPlayerTypeX ? self.playerXAttributedString : self.playerOAttributedString;
-    
-//    
-//    NSMutableAttributedString* player1AttributedString = [[NSMutableAttributedString alloc] initWithString:self.board.player1.playerName attributes:nil];
-//    [player1AttributedString appendAttributedString:spaceString];
-//    [player1AttributedString appendAttributedString:self.playerXAttributedString];
-//    
-//    NSMutableAttributedString* player2AttributedString = [[NSMutableAttributedString alloc] initWithString:self.board.player2.playerName attributes:nil];
-//    [player2AttributedString appendAttributedString:self.playerOAttributedString];
-////    [player2AttributedString appendAttributedString:@""];
-//    
-//    [self.restartPlayer1 setAttributedTitle:player1AttributedString forState:UIControlStateNormal];
-////    self.restartPlayer1.titleLabel.attributedText = player1AttributedString;
-//    self.restartPlayer2.titleLabel.attributedText = player2AttributedString;
-
 }
 
 - (void)allowUserInputForPlayer:(TTTPlayer *)player {
@@ -116,7 +102,6 @@
     return BOARD_SIZE;
 }
 
-// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TTTCollectionViewCell *cell = [self.ticTacToeCollectionView dequeueReusableCellWithReuseIdentifier:@"TTTCollectionViewCell" forIndexPath:indexPath];
     cell.layer.borderWidth = 1;
