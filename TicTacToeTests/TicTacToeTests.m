@@ -13,16 +13,18 @@
 #import "TTTBoard.h"
 
 @interface TicTacToeTests : XCTestCase
-@property (nonatomic, strong) TTTPlayer* player1;
-@property (nonatomic, strong) TTTExpertPlayer* player2;
+@property (nonatomic, strong) TTTPlayer* playerUser;
+@property (nonatomic, strong) TTTExpertPlayer* playerMinimax;
+@property (nonatomic, strong) TTTExpertPlayer* playerNaive;
 @end
 
 @implementation TicTacToeTests
 
 - (void)setUp {
     [super setUp];
-    self.player1 = [[TTTPlayer alloc] initWithName:@"Player 1 Test" playerType:TTTPlayerTypeX];
-    self.player2 = [[TTTExpertPlayer alloc] initWithName:@"Player 2 Test" playerType:TTTPlayerTypeO strategy:TTTSTrategyTypeMiniMax];
+    self.playerUser = [[TTTPlayer alloc] initWithName:@"User" playerType:TTTPlayerTypeX];
+    self.playerMinimax = [[TTTExpertPlayer alloc] initWithName:@"MiniMax" playerType:TTTPlayerTypeO strategy:TTTSTrategyTypeMiniMax];
+    self.playerNaive = [[TTTExpertPlayer alloc] initWithName:@"Naive" playerType:TTTPlayerTypeX strategy:TTTStrategyTypeNaive];
 }
 
 - (void)tearDown {
@@ -31,8 +33,8 @@
 }
 
 - (void)testBlockWin {
-    TTTBoard* board = [[TTTBoard alloc] initGameWithPlayer1:self.player1 player2:self.player2];
-    board.activePlayer = self.player1;
+    TTTBoard* board = [[TTTBoard alloc] initGameWithPlayer1:self.playerUser player2:self.playerMinimax];
+    board.activePlayer = self.playerUser;
     // X
     [board markBoardNoOpAtPosition:1];
     // O
@@ -44,13 +46,13 @@
     // - X -
     // - - -
     //
-    int pos = [self.player2 makeNextMoveOnBoard:board];
+    int pos = [self.playerMinimax makeNextMoveOnBoard:board];
     XCTAssertTrue(pos == 7, @"AI should block X winning move");
 }
 
 - (void)testBlockWinAndGetWin {
-    TTTBoard* board = [[TTTBoard alloc] initGameWithPlayer1:self.player1 player2:self.player2];
-    board.activePlayer = self.player1;
+    TTTBoard* board = [[TTTBoard alloc] initGameWithPlayer1:self.playerUser player2:self.playerMinimax];
+    board.activePlayer = self.playerUser;
     // X
     [board markBoardNoOpAtPosition:0];
     // O
@@ -62,7 +64,7 @@
     // - O -
     // X - -
     //
-    int pos = [self.player2 makeNextMoveOnBoard:board];
+    int pos = [self.playerMinimax makeNextMoveOnBoard:board];
     [board markBoardNoOpAtPosition:pos];
     XCTAssertTrue(pos == 3, @"AI should block X winning move");
     
@@ -75,17 +77,25 @@
     // X - -
     //
     // O should seek win
-    [board markBoardNoOpAtPosition:[self.player2 makeNextMoveOnBoard:board]];
-    XCTAssertTrue(self.player2 == board.winningPlayer, @"AI should choose winning move");
+    [board markBoardNoOpAtPosition:[self.playerMinimax makeNextMoveOnBoard:board]];
+    XCTAssertTrue(self.playerMinimax == board.winningPlayer, @"AI should choose winning move");
 }
 
-- (void)testPerformanceAI {
-    // This is an example of a performance test case.
-    TTTBoard* board = [[TTTBoard alloc] initGameWithPlayer1:self.player1 player2:self.player2];
-    board.activePlayer = self.player2;
+- (void)testPerformanceMinimaxAI {
+    TTTBoard* board = [[TTTBoard alloc] initGameWithPlayer1:self.playerNaive player2:self.playerMinimax];
+    board.activePlayer = self.playerMinimax;
+    __weak TicTacToeTests* weakSelf = self;
     [self measureBlock:^{
-        int pos = [self.player2 makeNextMoveOnBoard:board];
-        [board markBoardNoOpAtPosition:pos];
+        [weakSelf.playerMinimax makeNextMoveOnBoard:board];
+    }];
+}
+
+- (void)testPerformanceNaiveAI {
+    TTTBoard* board = [[TTTBoard alloc] initGameWithPlayer1:self.playerNaive player2:self.playerMinimax];
+    board.activePlayer = self.playerNaive;
+    __weak TicTacToeTests* weakSelf = self;
+    [self measureBlock:^{
+        [weakSelf.playerNaive makeNextMoveOnBoard:board];
     }];
 }
 

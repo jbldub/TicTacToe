@@ -13,6 +13,9 @@
 
 - (int)optimalPositionFromBoard:(TTTBoard *)board {
     NSArray* available = [board possibleMoves];
+    if (available.count == 0) {
+        return -1;
+    }
     int randomIndex = arc4random_uniform((uint)available.count);
     return [[available objectAtIndex:randomIndex] intValue];
 }
