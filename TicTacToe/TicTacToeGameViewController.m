@@ -12,11 +12,16 @@
 
 @interface TicTacToeGameViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UICollectionView *ticTacToeCollectionView;
-//@property (nonatomic, strong) TTTGame* game;
 @property (nonatomic, strong) TTTBoard* board;
 @property (nonatomic, weak) TTTPlayer* activePlayer;
 @property (nonatomic, strong) NSAttributedString* playerXAttributedString;
 @property (nonatomic, strong) NSAttributedString* playerOAttributedString;
+@property (weak, nonatomic) IBOutlet UILabel *player1Label;
+@property (weak, nonatomic) IBOutlet UILabel *player2Label;
+@property (weak, nonatomic) IBOutlet UILabel *winnerLabel;
+@property (weak, nonatomic) IBOutlet UILabel *player2SymbolLabel;
+@property (weak, nonatomic) IBOutlet UILabel *player1SymbolLabel;
+- (IBAction)restartButtonPressed:(id)sender;
 @end
 
 @implementation TicTacToeGameViewController
@@ -49,8 +54,16 @@
     self.ticTacToeCollectionView.dataSource = self;
     self.ticTacToeCollectionView.allowsSelection = NO;
     
+    self.player1Label.text = self.board.player1.playerName;
+    self.player2Label.text = self.board.player2.playerName;
+    
     [self.ticTacToeCollectionView registerNib:[UINib nibWithNibName:@"TTTCollectionViewCell" bundle:[NSBundle mainBundle]]
         forCellWithReuseIdentifier:@"TTTCollectionViewCell"];
+    
+    self.player1SymbolLabel.attributedText = self.board.player1.type == TTTPlayerTypeX ? self.playerXAttributedString : self.playerOAttributedString;
+    
+    self.player2SymbolLabel.attributedText = self.board.player2.type == TTTPlayerTypeX ? self.playerXAttributedString : self.playerOAttributedString;
+
 }
 
 - (void)allowUserInputForPlayer:(TTTPlayer *)player {
@@ -61,10 +74,15 @@
 - (void)moveSuccessfulForPlayer:(TTTPlayer *)player atPosition:(TTTPosition)pos {
     NSIndexPath* indexPath = [NSIndexPath indexPathForRow:pos.y inSection:pos.x];
     NSArray* array = @[indexPath];
-//    TTTCollectionViewCell *cell = [self.ticTacToeCollectionView dequeueReusableCellWithReuseIdentifier:@"TTTCollectionViewCell" forIndexPath:indexPath];
-//    cell.ticTacToeMarker.attributedText = [self labelForPlayerAtIndexPath:indexPath];
     [self.ticTacToeCollectionView reloadItemsAtIndexPaths:array];
-//    [self.board queryNextMove];
+}
+
+- (void)gameWonByPlayer:(TTTPlayer *)player atPositions:(NSArray *)boardPositions {
+    if (!player) {
+        self.winnerLabel.text = @"Draw";
+    } else {
+        self.winnerLabel.text = [NSString stringWithFormat:@"%@ wins!", player.playerName];
+    }
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -108,10 +126,16 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(50, 50);
-}
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(5, 5, 5, 5);
+    return CGSizeMake(60, 45);
 }
 
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0, 50, 0, 50);
+}
+
+- (IBAction)restartButtonPressed:(id)sender {
+    self.winnerLabel.text = nil;
+    [self.board startGame];
+    [self.ticTacToeCollectionView reloadData];
+}
 @end

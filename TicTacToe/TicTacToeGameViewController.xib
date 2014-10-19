@@ -6,8 +6,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TicTacToeGameViewController">
             <connections>
+                <outlet property="player1Label" destination="uZh-Uu-fL7" id="aLO-KC-fkf"/>
+                <outlet property="player1SymbolLabel" destination="Haj-r4-nmu" id="cia-ec-Mgb"/>
+                <outlet property="player2Label" destination="BKf-NM-7LR" id="tbM-Gx-qnt"/>
+                <outlet property="player2SymbolLabel" destination="ynr-Ix-7IY" id="MXj-FT-cQl"/>
                 <outlet property="ticTacToeCollectionView" destination="qc4-4f-Pkl" id="Rsb-Gc-urc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="winnerLabel" destination="rF5-6s-Bg4" id="BwF-WB-VOc"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -17,22 +22,73 @@
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qc4-4f-Pkl">
                     <rect key="frame" x="20" y="40" width="280" height="240"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="280" id="iIO-5k-eV1"/>
+                        <constraint firstAttribute="width" constant="280" id="l4R-cM-OhK"/>
                         <constraint firstAttribute="height" constant="240" id="xWG-SU-NGf"/>
                     </constraints>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hlm-0y-OXg">
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="hlm-0y-OXg">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZh-Uu-fL7">
+                    <rect key="frame" x="20" y="381" width="57.5" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BKf-NM-7LR">
+                    <rect key="frame" x="238" y="381" width="62" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rF5-6s-Bg4">
+                    <rect key="frame" x="20" y="437" width="280" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="weY-Lx-tdJ">
+                    <rect key="frame" x="124" y="530" width="72" height="30"/>
+                    <state key="normal" title="Restart">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="restartButtonPressed:" destination="-1" eventType="touchUpInside" id="LsW-Ha-JqD"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Haj-r4-nmu">
+                    <rect key="frame" x="43" y="414" width="11" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="O" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynr-Ix-7IY">
+                    <rect key="frame" x="263" y="414" width="13" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="Haj-r4-nmu" firstAttribute="centerX" secondItem="uZh-Uu-fL7" secondAttribute="centerX" constant="-0.25" id="0Xs-nd-qxK"/>
+                <constraint firstItem="BKf-NM-7LR" firstAttribute="top" secondItem="qc4-4f-Pkl" secondAttribute="bottom" constant="101" id="3Pt-g1-5Gb"/>
+                <constraint firstAttribute="trailing" secondItem="BKf-NM-7LR" secondAttribute="trailing" constant="20" id="8Zz-n6-rJl"/>
+                <constraint firstItem="rF5-6s-Bg4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="9JR-ap-Jmc"/>
+                <constraint firstItem="uZh-Uu-fL7" firstAttribute="top" secondItem="qc4-4f-Pkl" secondAttribute="bottom" constant="101" id="S1I-7q-gws"/>
+                <constraint firstAttribute="bottom" secondItem="rF5-6s-Bg4" secondAttribute="bottom" constant="110" id="Yw3-Im-8yR"/>
+                <constraint firstAttribute="trailing" secondItem="rF5-6s-Bg4" secondAttribute="trailing" constant="20" id="aly-dp-fUg"/>
+                <constraint firstItem="uZh-Uu-fL7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="cab-JY-EJ4"/>
+                <constraint firstItem="ynr-Ix-7IY" firstAttribute="centerX" secondItem="BKf-NM-7LR" secondAttribute="centerX" constant="0.5" id="eWi-Rr-zci"/>
                 <constraint firstItem="qc4-4f-Pkl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="40" id="t7n-2H-hBC"/>
+                <constraint firstItem="Haj-r4-nmu" firstAttribute="top" secondItem="uZh-Uu-fL7" secondAttribute="bottom" constant="12.5" id="tBO-H7-W8c"/>
+                <constraint firstItem="rF5-6s-Bg4" firstAttribute="top" secondItem="qc4-4f-Pkl" secondAttribute="bottom" constant="157" id="uhB-CG-LFU"/>
+                <constraint firstItem="ynr-Ix-7IY" firstAttribute="top" secondItem="BKf-NM-7LR" secondAttribute="bottom" constant="12.5" id="x9f-p9-CHH"/>
                 <constraint firstAttribute="centerX" secondItem="qc4-4f-Pkl" secondAttribute="centerX" id="yac-pQ-iCH"/>
             </constraints>
             <point key="canvasLocation" x="565" y="570"/>

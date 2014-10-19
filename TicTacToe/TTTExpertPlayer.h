@@ -14,7 +14,6 @@
 @interface TTTExpertPlayer : TTTPlayer
 
 - (id)initWithName:(NSString *)playerName playerType:(TTTPlayerType)type strategy:(TTTStrategyType)strategy;
-
 - (int)makeNextMoveOnBoard:(TTTBoard*)board;
 
 @end

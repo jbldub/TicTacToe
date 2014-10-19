@@ -22,7 +22,7 @@
     self = [super initWithName:playerName playerType:type];
     
     if (self) {
-        _strategy = [[TTTStrategyFactory sharedInstance] strategyForType:strategy];
+        _strategy = [[TTTStrategyFactory sharedInstance] strategyForType:strategy player:self];
     }
     
     return self;

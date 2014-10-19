@@ -9,9 +9,10 @@
 #import "TTTStrategyMinimax.h"
 #import "TTTConstants.h"
 #import "TTTBoard.h"
+#import "TTTPlayer.h"
 
-static const int kAlpha = -1000;
-static const int kBeta = 1000;
+static const int kAlpha = INT_MIN;
+static const int kBeta = INT_MAX;
 
 typedef struct TTTPositionWithScore {
     TTTPosition pos;
@@ -38,7 +39,6 @@ MoveWithScore MoveWithScoreMake(int pos, int score) {
 }
 
 @interface TTTStrategyMinimax ()
-@property (nonatomic, weak) TTTPlayer* maxPlayer;
 @end
 
 
@@ -70,53 +70,79 @@ MoveWithScore MoveWithScoreMake(int pos, int score) {
     if ([board gameEnded]) {
         MoveWithScore moveScore;
         moveScore.score = [self evaluateBoard:board];
+        moveScore.pos = -1;
         return moveScore;
     }
     
     NSArray* possible = [board possibleMoves];
     if (max) {
-        NSNumber *lastMove;
+        NSNumber *currMove = [NSNumber numberWithInt:-1];
         for (NSNumber* move in possible) {
             TTTBoard* child = [board copy];
-            [child markBoardAtPosition:[move intValue]];
+            [child markBoardNoOpAtPosition:[move intValue]];
             MoveWithScore moveScore = [self minimaxFromBoard:child max:!max alpha:alpha beta:beta];
-            moveScore.pos = [move intValue];
             if (moveScore.score > alpha) {
                 alpha = moveScore.score;
+                currMove = move;
             }
             if (alpha >= beta) {
-                return moveScore;
+                return MoveWithScoreMake([currMove intValue], alpha);;
             }
         }
-        return MoveWithScoreMake([lastMove intValue], alpha);
+        return MoveWithScoreMake([currMove intValue], alpha);
     }
     else {
-        NSNumber *lastMove;
+        NSNumber *currMove = [NSNumber numberWithInt:-1];
         for (NSNumber* move in possible) {
             TTTBoard* child = [board copy];
-            [child markBoardAtPosition:[move intValue]];
+            [child markBoardNoOpAtPosition:[move intValue]];
             MoveWithScore moveScore = [self minimaxFromBoard:child max:!max alpha:alpha beta:beta];
-            moveScore.pos = [move intValue];
-            if (moveScore.score < alpha) {
+            if (moveScore.score < beta) {
                 beta = moveScore.score;
+                currMove = move;
             }
             if (alpha >= beta) {
-                return moveScore;
+                return MoveWithScoreMake([currMove intValue], beta);
             }
         }
-        return MoveWithScoreMake([lastMove intValue], beta);
+        return MoveWithScoreMake([currMove intValue], beta);
     }
     
 }
 
 - (int)evaluateBoard:(TTTBoard*)board {
-    TTTPlayer* player = board.winningPlayer;
-    if ( !player ) {
+    int score = 0;
+    for (NSArray* scoreTuple in [TTTBoard winningScores]) {
+        score += [self evaluateWinningTuple:scoreTuple forBoard:board];
+    }
+    return score;
+}
+
+- (int)evaluateWinningTuple:(NSArray*)tuple forBoard:(TTTBoard*)board {
+    int countX = 0, countO = 0;
+    for (NSNumber* pos in tuple) {
+        int position = [pos intValue];
+        TTTPlayer* player = [board playerAtPosition:position];
+        if (player && player.type == TTTPlayerTypeX) {
+            countX++;
+        } else if (player && player.type == TTTPlayerTypeO) {
+            countO++;
+        }
+    }
+    TTTPlayerType type = self.maxPlayer.type;
+    // if countO is equal to 0 and countX isn't we are interested in this score
+    if (countO == 0 && countX != 0) {
+        int factor = type == TTTPlayerTypeX ? 1 : -1;
+        return factor * pow(10, countX);
+    }
+    // if countX is equal to 0 and countO isn't we are interested in this score
+    else if (countX == 0 && countO != 0) {
+        int factor = type == TTTPlayerTypeO ? 1 : -1;
+        return factor * pow(10, countO);
+    }
+    // otherwise we have at least one of each in this row and it's no use
+    else {
         return 0;
-    } else if (player == self.maxPlayer) {
-        return 10;
-    } else {
-        return -10;
     }
 }
 

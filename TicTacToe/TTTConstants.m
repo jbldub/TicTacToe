@@ -16,7 +16,7 @@ TTTPosition TTTPositionMake(int x, int y) {
 }
 
 int intFromTTTPosition(TTTPosition pos) {
-    return pos.x + pos.y * BOARD_SIZE;
+    return (pos.x * BOARD_SIZE) + pos.y;
 }
 
 TTTPosition TTTPositionFromInt(int pos) {
@@ -24,10 +24,3 @@ TTTPosition TTTPositionFromInt(int pos) {
     int y = pos % BOARD_SIZE;
     return TTTPositionMake(x, y);
 }
-
-//NSIndexPath* indexPathFromInt(int pos) {
-//    TTTPosition tttPos = TTTPositionFromInt(pos);
-//    NSIndexPath index
-//    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:tttPos.y inSection:tttPos.x];
-//    return indexPath;
-//}

@@ -22,14 +22,14 @@
     return sharedSingleton;
 }
 
-- (id<TTTStrategy>)strategyForType:(TTTStrategyType)type {
+- (id<TTTStrategy>)strategyForType:(TTTStrategyType)type player:(TTTPlayer *)player {
     id<TTTStrategy> strategy = nil;
     switch (type) {
         case TTTStrategyTypeNaive:
             strategy = [[TTTStrategyNaive alloc] init];
             break;
         case TTTSTrategyTypeMiniMax:
-            strategy = [[TTTStrategyMinimax alloc] init];
+            strategy = [[TTTStrategyMinimax alloc] initWithPlayer:player];
             break;
         default:
             break;

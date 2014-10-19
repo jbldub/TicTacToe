@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "TTTStrategy.h"
 
+@class TTTPlayer;
+
 @interface TTTStrategyMinimax : NSObject<TTTStrategy>
-
-
-
+@property (nonatomic, weak) TTTPlayer* maxPlayer;
+- (id)initWithPlayer:(TTTPlayer*)player;
 @end

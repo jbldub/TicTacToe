@@ -11,11 +11,9 @@
 #import "TTTExpertPlayer.h"
 
 @interface TTTBoard () {
-    TTTPlayer* board[BOARD_SIZE][BOARD_SIZE];
-    TTTPlayer* board1[BOARD_SIZE*BOARD_SIZE];
+    TTTPlayer* board[BOARD_SIZE*BOARD_SIZE];
 }
 @property (nonatomic, strong) NSMutableSet* availableMoves;
-@property (nonatomic, readwrite) BOOL gameInProgress;
 @end
 
 @implementation TTTBoard
@@ -26,10 +24,6 @@
     if (self) {
         _player1 = player1;
         _player2 = player2;
-        _availableMoves = [[NSMutableSet alloc] init];
-        for (int i = 0; i < BOARD_SIZE*BOARD_SIZE; i++) {
-            [_availableMoves addObject:[NSNumber numberWithInteger:i]];
-        }
     }
     
     return self;
@@ -41,9 +35,9 @@
         [newBoard setPlayer1:[self player1]];
         [newBoard setPlayer2:[self player2]];
         [newBoard setActivePlayer:[self activePlayer]];
-        [newBoard setAvailableMoves:[self.availableMoves copy]];
+        [newBoard setAvailableMoves:[self.availableMoves mutableCopy]];
         for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; i++) {
-            newBoard->board1[i] = board1[i];
+            newBoard->board[i] = board[i];
         }
     }
     
@@ -51,17 +45,28 @@
 }
 
 - (void)startGame {
-    
-    if (!self.activePlayer) {
-        _activePlayer = self.player1;
+    for (int i = 0; i < BOARD_SIZE*BOARD_SIZE; i++) {
+        board[i] = nil;
     }
     
-    self.gameInProgress = YES;
+    self.activePlayer = self.player1;
+    self.winningPlayer = nil;
+    self.winningRow = nil;
+    
+    _availableMoves = [[NSMutableSet alloc] init];
+    for (int i = 0; i < BOARD_SIZE*BOARD_SIZE; i++) {
+        [_availableMoves addObject:[NSNumber numberWithInteger:i]];
+    }
+    
+    self.gameEnded = NO;
     [self queryNextMove];
 }
 
 - (void)queryNextMove {
-    if ([self.activePlayer isKindOfClass:[TTTExpertPlayer class]]) {
+    if (self.gameEnded) {
+        [self.delegate gameWonByPlayer:self.winningPlayer atPositions:self.winningRow];
+    }
+    else if ([self.activePlayer isKindOfClass:[TTTExpertPlayer class]]) {
         int pos = [(TTTExpertPlayer*)self.activePlayer makeNextMoveOnBoard:self];
         [self markBoardAtPosition:pos];
     } else {
@@ -69,28 +74,30 @@
     }
 }
 
-- (BOOL)markBoardWithPlayer:(TTTPlayer*)player position:(TTTPosition)pos {
-    
-    if ([self validTTTPosition:pos] && !board[pos.x][pos.y]) {
-        board[pos.x][pos.y] = player;
-        return true;
-    }
-    
-    return false;
+- (void)markBoardAtTTTPosition:(TTTPosition)pos {
+    [self markBoardAtPosition:intFromTTTPosition(pos)];
 }
 
-- (BOOL)markBoardAtPosition:(int)pos {
-    if (!self.gameEnded && [self validPosition:pos] && !board1[pos]) {
-        board1[pos] = self.activePlayer;
+- (void)markBoardAtPosition:(int)pos {
+    if (!self.gameEnded && [self validPosition:pos] && !board[pos]) {
+        board[pos] = self.activePlayer;
         [self.availableMoves removeObject:[NSNumber numberWithInteger:pos]];
         if (![self evaluateWinner]) {
             self.activePlayer = self.activePlayer == self.player1 ? self.player2 : self.player1;
         }
         [self.delegate moveSuccessfulForPlayer:self.activePlayer atPosition:TTTPositionFromInt(pos)];
-        return true;
     }
-    
-    return false;
+    [self queryNextMove];
+}
+
+- (void)markBoardNoOpAtPosition:(int)pos {
+    if (!self.gameEnded && [self validPosition:pos] && !board[pos]) {
+        board[pos] = self.activePlayer;
+        [self.availableMoves removeObject:[NSNumber numberWithInteger:pos]];
+        if (![self evaluateWinner]) {
+            self.activePlayer = self.activePlayer == self.player1 ? self.player2 : self.player1;
+        }
+    }
 }
 
 - (TTTPlayer*)evaluateWinner {
@@ -117,11 +124,11 @@
 }
 
 - (TTTPlayer*)playerAtTTTPosition:(TTTPosition)pos {
-    return [self validTTTPosition:pos] ? board[pos.x][pos.y] : nil;
+    return [self playerAtPosition:intFromTTTPosition(pos)];
 }
 
 - (TTTPlayer*)playerAtPosition:(int)pos {
-    return [self validPosition:pos] ? board1[pos] : nil;
+    return [self validPosition:pos] ? board[pos] : nil;
 }
 
 - (BOOL)validTTTPosition:(TTTPosition)pos {
@@ -145,20 +152,20 @@
     static NSMutableArray* _winningScores;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-    
+        _winningScores = [[NSMutableArray alloc] init];
         // build row winners
-        for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; i++) {
+        for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; i+= BOARD_SIZE) {
             NSMutableArray *line = [[NSMutableArray alloc] init];
-            for (int j = i; j < BOARD_SIZE; j++) {
+            for (int j = i; j < i + BOARD_SIZE; j++) {
                 [line addObject:[NSNumber numberWithInt:j]];
             }
             [_winningScores addObject:line];
         }
         
         // build column winners
-        for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; i++) {
+        for (int i = 0; i < BOARD_SIZE; i++) {
             NSMutableArray *line = [[NSMutableArray alloc] init];
-            for (int j = i+1; j < BOARD_SIZE; j+=3) {
+            for (int j = i; j <= BOARD_SIZE * (BOARD_SIZE -1) + i; j += BOARD_SIZE) {
                 [line addObject:[NSNumber numberWithInt:j]];
             }
             [_winningScores addObject:line];
@@ -166,7 +173,7 @@
         
         NSMutableArray *winningDiagonal = [[NSMutableArray alloc] init];
         // diagonal
-        for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; i+= BOARD_SIZE) {
+        for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; i+= BOARD_SIZE + 1) {
             [winningDiagonal addObject:[NSNumber numberWithInteger:i]];
         }
         [_winningScores addObject:winningDiagonal];
@@ -174,12 +181,25 @@
         
         NSMutableArray *winningReverseDiagonal = [[NSMutableArray alloc] init];
         // reverse diagonal
-        for (int i = BOARD_SIZE * (BOARD_SIZE - 1); i > BOARD_SIZE - 1; i-= BOARD_SIZE - 1) {
+        for (int i = BOARD_SIZE - 1; i <= BOARD_SIZE * (BOARD_SIZE - 1); i += BOARD_SIZE - 1) {
             [winningReverseDiagonal addObject:[NSNumber numberWithInteger:i]];
         }
         [_winningScores addObject:winningReverseDiagonal];
     });
     return _winningScores;
+}
+
+- (NSString*)description {
+    NSMutableString* desc = [[NSMutableString alloc] init];
+    [desc appendString:@"\n"];
+    for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; i += BOARD_SIZE) {
+        for (int j = i; j < i + BOARD_SIZE; j++) {
+            [desc appendString:board[j] ? board[j].type == TTTPlayerTypeO ? @"O" : @"X" : @" "];
+            [desc appendString:@"  "];
+        }
+        [desc appendString:@"\n"];
+    }
+    return desc;
 }
 
 @end

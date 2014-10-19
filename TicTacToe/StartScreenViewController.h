@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface StartScreenViewController : UIViewController
-- (IBAction)startGameButtonPressed:(id)sender;
+- (IBAction)startGameButtonPressed:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UITextField *player1TextField;
 @property (weak, nonatomic) IBOutlet UITextField *player2TextField;
 @end

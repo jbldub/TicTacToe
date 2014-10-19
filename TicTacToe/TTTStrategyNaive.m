@@ -11,8 +11,10 @@
 
 @implementation TTTStrategyNaive
 
-- (TTTPosition)optimalPositionFromBoard:(TTTBoard *)board player:(id)player{
-    return TTTPositionMake(0, 0);
+- (int)optimalPositionFromBoard:(TTTBoard *)board {
+    NSArray* available = [board possibleMoves];
+    int randomIndex = arc4random_uniform((uint)available.count);
+    return [[available objectAtIndex:randomIndex] intValue];
 }
 
 @end

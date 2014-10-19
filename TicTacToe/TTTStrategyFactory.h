@@ -19,7 +19,7 @@ typedef enum {
 @interface TTTStrategyFactory : NSObject
 
 + (TTTStrategyFactory *)sharedInstance;
-- (id<TTTStrategy>)strategyForType:(TTTStrategyType)type;
+- (id<TTTStrategy>)strategyForType:(TTTStrategyType)type player:(TTTPlayer*)player;
 
 @end
 

@@ -9,9 +9,10 @@
 #import "StartScreenViewController.h"
 #import "TicTacToeGameViewController.h"
 #import "TTTPlayer.h"
+#import "TTTExpertPlayer.h"
 #import "TTTBoard.h"
 
-@interface StartScreenViewController ()
+@interface StartScreenViewController () <UITextFieldDelegate>
 
 @end
 
@@ -19,32 +20,35 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.player1TextField.delegate = self;
+    self.player2TextField.delegate = self;
     // Do any additional setup after loading the view from its nib.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-- (IBAction)startGameButtonPressed:(id)sender {
+- (IBAction)startGameButtonPressed:(UIButton*)sender {
+    
     TTTPlayer* player1 = [[TTTPlayer alloc] initWithName:self.player1TextField.text playerType:TTTPlayerTypeX];
-    TTTPlayer* player2 = [[TTTPlayer alloc] initWithName:self.player2TextField.text playerType:TTTPlayerTypeO];
+    TTTPlayer* player2;
+    
+    if (sender.tag == 0) {
+        player2 = [[TTTPlayer alloc] initWithName:self.player2TextField.text playerType:TTTPlayerTypeO];
+    } else if (sender.tag == 1) {
+        player2 = [[TTTExpertPlayer alloc] initWithName:self.player2TextField.text playerType:TTTPlayerTypeO strategy:TTTSTrategyTypeMiniMax];
+    }
+    
     TTTBoard* board = [[TTTBoard alloc] initGameWithPlayer1:player1 player2:player2];
     TicTacToeGameViewController* gameVC = [[TicTacToeGameViewController alloc] initWithBoard:board];
     
     [self.navigationController pushViewController:gameVC animated:YES];
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.player1TextField) {
+        [self.player2TextField becomeFirstResponder];
+    } else {
+        [textField resignFirstResponder];
+    }
+    return YES;
+}
+
 @end

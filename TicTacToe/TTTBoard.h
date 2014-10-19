@@ -21,13 +21,15 @@
 
 @interface TTTBoard : NSObject<NSCopying>
 - (id)initGameWithPlayer1:(TTTPlayer*)player1 player2:(TTTPlayer*)player2;
-- (BOOL)markBoardWithPlayer:(TTTPlayer*)player position:(TTTPosition)pos;
-- (BOOL)markBoardAtPosition:(int)pos;
+- (void)markBoardAtTTTPosition:(TTTPosition)pos;
+- (void)markBoardAtPosition:(int)pos;
+- (void)markBoardNoOpAtPosition:(int)pos;
 - (TTTPlayer*)playerAtTTTPosition:(TTTPosition)pos;
 - (TTTPlayer*)playerAtPosition:(int)pos;
 - (NSArray*)possibleMoves;
 + (NSArray*)winningScores;
 - (void)startGame;
+- (NSString*)description;
 
 @property (nonatomic) BOOL gameEnded;
 @property (nonatomic, strong) TTTPlayer* player1;

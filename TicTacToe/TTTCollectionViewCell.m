@@ -9,9 +9,4 @@
 #import "TTTCollectionViewCell.h"
 
 @implementation TTTCollectionViewCell
-
-- (void)awakeFromNib {
-    // Initialization code
-}
-
 @end
