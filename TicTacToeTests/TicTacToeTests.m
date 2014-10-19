@@ -79,4 +79,15 @@
     XCTAssertTrue(self.player2 == board.winningPlayer, @"AI should choose winning move");
 }
 
+- (void)testPerformanceAI {
+    // This is an example of a performance test case.
+    TTTBoard* board = [[TTTBoard alloc] initGameWithPlayer1:self.player1 player2:self.player2];
+    board.activePlayer = self.player2;
+    [self measureBlock:^{
+        int pos = [self.player2 makeNextMoveOnBoard:board];
+        [board markBoardNoOpAtPosition:pos];
+    }];
+}
+
+
 @end
