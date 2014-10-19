@@ -24,6 +24,11 @@
     if (self) {
         _player1 = player1;
         _player2 = player2;
+        
+        _availableMoves = [[NSMutableSet alloc] init];
+        for (int i = 0; i < BOARD_SIZE*BOARD_SIZE; i++) {
+            [_availableMoves addObject:[NSNumber numberWithInteger:i]];
+        }
     }
     
     return self;
@@ -66,7 +71,7 @@
     if (self.gameEnded) {
         [self.delegate gameWonByPlayer:self.winningPlayer atPositions:self.winningRow];
     }
-    else if ([self.activePlayer automatedPlayer]) {
+    else if ([self.activePlayer isKindOfClass:[TTTExpertPlayer class]]) {
         int pos = [(TTTExpertPlayer*)self.activePlayer makeNextMoveOnBoard:self];
         [self markBoardAtPosition:pos];
     } else {
