@@ -1,12 +1,12 @@
 //
-//  TTTConstants.m
+//  TTTDefines.m
 //  TicTacToe
 //
 //  Created by Justin Williams on 10/15/14.
 //  Copyright (c) 2014 Justin Williams. All rights reserved.
 //
 
-#import "TTTConstants.h"
+#import "TTTDefines.h"
 
 TTTPosition TTTPositionMake(int x, int y) {
     TTTPosition pos;

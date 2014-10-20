@@ -7,7 +7,7 @@
 //
 
 #import "TTTStrategyMinimax.h"
-#import "TTTConstants.h"
+#import "TTTDefines.h"
 #import "TTTBoard.h"
 #import "TTTPlayer.h"
 

@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
+    TTTPlayerTypeEmpty,
     TTTPlayerTypeX,
     TTTPlayerTypeO,
-    TTTPlayerTypeEmpty
 } TTTPlayerType;
 
 @interface TTTPlayer : NSObject

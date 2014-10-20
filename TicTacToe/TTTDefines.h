@@ -1,5 +1,5 @@
 //
-//  TTTConstants.h
+//  TTTDefines.h
 //  TicTacToe
 //
 //  Created by Justin Williams on 10/15/14.

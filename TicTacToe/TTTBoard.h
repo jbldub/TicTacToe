@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TTTConstants.h"
+#import "TTTDefines.h"
 
 @class TTTPlayer;
 
@@ -23,13 +23,12 @@
 - (id)initGameWithPlayer1:(TTTPlayer*)player1 player2:(TTTPlayer*)player2;
 - (void)markBoardAtTTTPosition:(TTTPosition)pos;
 - (void)markBoardAtPosition:(int)pos;
-- (void)markBoardNoOpAtPosition:(int)pos;
+- (BOOL)markBoardNoOpAtPosition:(int)pos;
 - (TTTPlayer*)playerAtTTTPosition:(TTTPosition)pos;
 - (TTTPlayer*)playerAtPosition:(int)pos;
 - (NSArray*)possibleMoves;
-+ (NSArray*)winningScores;
 - (void)startGameFirstPlayer:(TTTPlayer*)player;
-- (NSString*)description;
++ (NSArray*)winningScores;
 
 @property (nonatomic) BOOL gameEnded;
 @property (nonatomic, strong) TTTPlayer* player1;

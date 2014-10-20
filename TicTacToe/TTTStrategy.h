@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TTTConstants.h"
+#import "TTTDefines.h"
 
 @class TTTBoard;
 

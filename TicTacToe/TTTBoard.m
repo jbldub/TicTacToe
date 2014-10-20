@@ -41,6 +41,9 @@
         [newBoard setPlayer2:[self player2]];
         [newBoard setActivePlayer:[self activePlayer]];
         [newBoard setAvailableMoves:[self.availableMoves mutableCopy]];
+        [newBoard setGameEnded:self.gameEnded];
+        [newBoard setWinningPlayer:self.winningPlayer];
+        [newBoard setWinningRow:self.winningRow];
         for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; i++) {
             newBoard->board[i] = board[i];
         }
@@ -84,25 +87,22 @@
 }
 
 - (void)markBoardAtPosition:(int)pos {
-    if (!self.gameEnded && [self validPosition:pos] && !board[pos]) {
-        board[pos] = self.activePlayer;
-        [self.availableMoves removeObject:[NSNumber numberWithInteger:pos]];
-        if (![self evaluateWinner]) {
-            self.activePlayer = self.activePlayer == self.player1 ? self.player2 : self.player1;
-        }
+    if ([self markBoardNoOpAtPosition:pos]) {
         [self.delegate moveSuccessfulForPlayer:self.activePlayer atPosition:TTTPositionFromInt(pos)];
     }
     [self queryNextMove];
 }
 
-- (void)markBoardNoOpAtPosition:(int)pos {
+- (BOOL)markBoardNoOpAtPosition:(int)pos {
     if (!self.gameEnded && [self validPosition:pos] && !board[pos]) {
         board[pos] = self.activePlayer;
         [self.availableMoves removeObject:[NSNumber numberWithInteger:pos]];
         if (![self evaluateWinner]) {
             self.activePlayer = self.activePlayer == self.player1 ? self.player2 : self.player1;
         }
+        return true;
     }
+    return false;
 }
 
 - (TTTPlayer*)evaluateWinner {

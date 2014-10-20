@@ -21,7 +21,7 @@
 		D08ADE6D19EF3DCC0050175D /* TTTExpertPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ADE6C19EF3DCC0050175D /* TTTExpertPlayer.m */; };
 		D08ADE7619EF3E410050175D /* TTTStrategyFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ADE7519EF3E410050175D /* TTTStrategyFactory.m */; };
 		D08ADE7919EF40B10050175D /* TTTStrategyNaive.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ADE7819EF40B10050175D /* TTTStrategyNaive.m */; };
-		D08ADE8919EF69080050175D /* TTTConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ADE8819EF69080050175D /* TTTConstants.m */; };
+		D08ADE8919EF69080050175D /* TTTDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ADE8819EF69080050175D /* TTTDefines.m */; };
 		D08ADE8D19EF72AD0050175D /* TTTCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ADE8B19EF72AD0050175D /* TTTCollectionViewCell.m */; };
 		D08ADE8E19EF72AD0050175D /* TTTCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D08ADE8C19EF72AD0050175D /* TTTCollectionViewCell.xib */; };
 		D08ADE9119F1D4DC0050175D /* TTTStrategyMinimax.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ADE9019F1D4DC0050175D /* TTTStrategyMinimax.m */; };
@@ -65,8 +65,8 @@
 		D08ADE7719EF40B10050175D /* TTTStrategyNaive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTStrategyNaive.h; sourceTree = "<group>"; };
 		D08ADE7819EF40B10050175D /* TTTStrategyNaive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTStrategyNaive.m; sourceTree = "<group>"; };
 		D08ADE7E19EF50E60050175D /* TTTStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTStrategy.h; sourceTree = "<group>"; };
-		D08ADE8719EF69080050175D /* TTTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTConstants.h; sourceTree = "<group>"; };
-		D08ADE8819EF69080050175D /* TTTConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTConstants.m; sourceTree = "<group>"; };
+		D08ADE8719EF69080050175D /* TTTDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTDefines.h; sourceTree = "<group>"; };
+		D08ADE8819EF69080050175D /* TTTDefines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTDefines.m; sourceTree = "<group>"; };
 		D08ADE8A19EF72AD0050175D /* TTTCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTCollectionViewCell.h; sourceTree = "<group>"; };
 		D08ADE8B19EF72AD0050175D /* TTTCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTCollectionViewCell.m; sourceTree = "<group>"; };
 		D08ADE8C19EF72AD0050175D /* TTTCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TTTCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -115,8 +115,8 @@
 			children = (
 				D08ADE2C19EDEA2D0050175D /* AppDelegate.h */,
 				D08ADE2D19EDEA2D0050175D /* AppDelegate.m */,
-				D08ADE8719EF69080050175D /* TTTConstants.h */,
-				D08ADE8819EF69080050175D /* TTTConstants.m */,
+				D08ADE8719EF69080050175D /* TTTDefines.h */,
+				D08ADE8819EF69080050175D /* TTTDefines.m */,
 				D08ADE6019EE05DB0050175D /* TTTPlayer.h */,
 				D08ADE6119EE05DB0050175D /* TTTPlayer.m */,
 				D08ADE6B19EF3DCC0050175D /* TTTExpertPlayer.h */,
@@ -221,6 +221,7 @@
 				TargetAttributes = {
 					D08ADE2419EDEA2D0050175D = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = H7H78D48BK;
 					};
 					D08ADE3D19EDEA2D0050175D = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -276,7 +277,7 @@
 			files = (
 				D08ADE6619EE13D40050175D /* TicTacToeGameViewController.m in Sources */,
 				D08ADE6A19EE303E0050175D /* TTTBoard.m in Sources */,
-				D08ADE8919EF69080050175D /* TTTConstants.m in Sources */,
+				D08ADE8919EF69080050175D /* TTTDefines.m in Sources */,
 				D08ADE7619EF3E410050175D /* TTTStrategyFactory.m in Sources */,
 				D08ADE7919EF40B10050175D /* TTTStrategyNaive.m in Sources */,
 				D08ADE6219EE05DB0050175D /* TTTPlayer.m in Sources */,
@@ -399,9 +400,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = TicTacToe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -409,9 +413,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = TicTacToe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
